@@ -66,18 +66,21 @@ public:
         map<int,int> mp;
         if(root == nullptr) return res;
         traversal(root);
-        for(int i = 0;i<vec.size();i++){
+        for(int i = 0;i<vec.size();i++){  // 统计每个值 出现的频率，key 是值 value是出现的次数
             mp[vec[i]]++;
         }
-        vector<int> vec1;
+        vector<int> vec1;           // 找到频率出现的最 大值
         for(map<int,int>::iterator it =mp.begin();it!=mp.end();it++){
             vec1.push_back(it->second);
         }
-
+        
         int max = vec1[0];
         for(auto & x:vec1){
             if(max<=x) max = x;
         }
+
+        //通过最大值  找到  每个值 放到  vector中
+
         for(map<int,int>::iterator it =mp.begin();it!=mp.end();it++){
             if(it->second == max){
                 res.push_back(it->first);
