@@ -1,5 +1,6 @@
 #include<iostream>
 #include<vector>
+#include<queue>
 
 using namespace std;
 
@@ -44,7 +45,20 @@ TreeNode* construct_binary_tree(const vector<int>& vec){
 // 如果直接生成 节点，对应的 地址 不一样，这样不对
 // 先根据值，找到对应的节点，可以
 TreeNode* findNode(TreeNode* root,int num){
-
+    if(root == nullptr) return nullptr;
+    queue<TreeNode*> que;
+    que.push(root);
+    while(!que.empty()){
+        int size = que.size();
+        for(int i= 0;i<size;i++){
+            TreeNode *node = que.front();
+            que.pop();
+            if(node->val == num) return node;
+            if(node->left) que.push(node->left);
+            if(node->right) que.push(node->right);
+        }
+    }
+    return nullptr;
 }
 
 class Solution {
@@ -67,8 +81,10 @@ public:
 int main(int argc, const char** argv) {
     vector<int> num = {8,10,4,1,7,15,20,-1,-1,6,5,-1,-1,-1,-1};
     TreeNode *root = construct_binary_tree(num);
+    TreeNode *node1 = findNode(root,6);
+    TreeNode *node2 = findNode(root,5);
     Solution sol;
-    TreeNode *fin = sol.lowestCommonAncestor(root,new TreeNode(6),new TreeNode(5));
+    TreeNode *fin = sol.lowestCommonAncestor(root,node1,node2);
     system("pause");
     return 0;
 }
