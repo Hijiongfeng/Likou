@@ -26,7 +26,7 @@ private:
         int mid = nums.size()/2;
         TreeNode *root = new TreeNode(nums[mid]);
 
-        vector<int> leftNums(nums.begin(),nums.begin()+mid);
+        vector<int> leftNums(nums.begin(),nums.begin()+mid);    //每次创建 一个新的 数组
         vector<int> rightNums(nums.begin()+mid+1,nums.end());
 
         root->left = traversal(leftNums);
