@@ -25,7 +25,7 @@ private:
             res.push_back(path);
             return;
         }
-        for(int i = startindex;i<vec.size();i++){
+        for(int i = startindex;i<vec.size() && accumulate(path.begin(),path.end(),vec[i]) <= target;i++){
             if(i>0 && vec[i] == vec[i-1] && used[i-1] == false){           // 这个去重的 逻辑 有点像 前面那个  三数之和，四数之和；
                 continue;
             }

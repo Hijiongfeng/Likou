@@ -26,7 +26,7 @@ private:
             res.push_back(path);
             return;
         }                                         // 用 startindex 是在 同一个 数组上进行操作；
-        for(int i=startindex;i<vec.size();i++){   // 用 startindex 确保不会去到当前值前面的数值  不加 1 ，可以去本身，加一 不取本身。
+        for(int i=startindex;i<vec.size() && sum+vec[i] <= target;i++){   // 用 startindex 确保不会去到当前值前面的数值  不加 1 ，可以去本身，加一 不取本身。
             sum += vec[i];
             path.push_back(vec[i]);
             backtracking(vec,target,sum,i);
