@@ -16,7 +16,7 @@ class Solution {
 private:
     vector<vector<int>> res;
     vector<int> path;
-    void backtracking(vector<int>& nums,vector<bool> used){
+    void backtracking(vector<int>& nums,vector<bool> used){    // 排列问题 不用 startIndex。组合问题 用startindex
         if(path.size() == nums.size()){
             res.push_back(path);
             return;
