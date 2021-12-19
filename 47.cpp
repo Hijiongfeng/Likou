@@ -44,6 +44,7 @@ public:
     }
 };
 
+
 int main(int argc, const char** argv) {
     vector<int> num{1,1,2};
     Solution sol;
