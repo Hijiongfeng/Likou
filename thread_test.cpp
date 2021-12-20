@@ -1,8 +1,12 @@
 #include <iostream>
 #include<thread>
 #include<Windows.h>
-
+#include<mutex>
+#include<chrono>       // std::chrono::seconds()
 using namespace std;
+
+int n = 0;
+std::mutex mut;         // 定义一个 mutex 类对象，创建一个互斥锁
 
 void threadFun1(int n) {
     Sleep(5);
@@ -14,6 +18,19 @@ void threadFun2(const char * url) {
     cout << "---thread2 running\n";
     cout << "url=" << url << endl;
 }
+
+
+void threadFun3(){
+    while(n<10){
+        mut.lock();  // 加锁
+        n++;
+        cout<<"ID"<<std::this_thread::get_id()<<" n = "<<n<<endl;
+        mut.unlock();  // 解锁
+        std::this_thread::sleep_for(chrono::seconds(1));
+        
+    }
+}
+
 int main1() {
     //调用第 1 种构造函数
     thread thread1(threadFun1,10);
@@ -29,7 +46,7 @@ int main1() {
 }
 
 
-int main() {
+int main2() {
     //调用第 1 种构造函数
     thread thread1(threadFun1, 10);
     //输出 thread1 线程的 ID
@@ -46,5 +63,15 @@ int main() {
         thread2.join();
     }
     cout << "main finished" << endl;
+    return 0;
+}
+
+int main()
+{
+    thread th1(threadFun3);
+    thread th2(threadFun3);
+    th1.join();
+    th2.join();
+    system("pause");
     return 0;
 }
