@@ -32,8 +32,8 @@ public:
 
 int main(int argc, char const *argv[])
 {
-    vector<int> price{1,3,7,5,10,3};
-    int fee = 3;
+    vector<int> price{1,3,2,8,10,4,9};
+    int fee = 2;
     Solution sol;
     cout<<sol.maxProfit(price,fee)<<endl;
     system("pause");
