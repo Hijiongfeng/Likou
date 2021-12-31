@@ -17,7 +17,7 @@ void func(){
     for(int i =1;i<weight.size();i++){
         for(int j = 0;j<=bagWeight;j++){
             if(j < weight[i]) dp[i][j] = dp[i-1][j];
-            else dp[i][j] = max(dp[i-1][j],dp[i-1][j-weight[i]+value[i]]);
+            else dp[i][j] = max(dp[i-1][j],dp[i-1][j-weight[i]]+value[i]);
         }
     }
     cout<<dp[weight.size()-1][bagWeight]<<endl;
