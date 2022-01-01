@@ -35,13 +35,30 @@ public:
         }
         return false;
     }
+
+    bool canPartition2(vector<int>& nums) {         // 一维数组
+        int sum = accumulate(nums.begin(),nums.end(),0);
+        if(sum % 2 == 1) return false;
+        int target = sum / 2;
+
+        vector<int> dp(target+1,0);
+
+        for(int i = 0;i<nums.size();i++){
+            for(int j = target;j>=nums[i];j--){
+                dp[j] = max(dp[j],dp[j-nums[i]]+nums[i]);
+            }
+        }
+
+        if(dp[target] == target) return true;
+        else return false;
+    }
 };
 
 int main(int argc, char const *argv[])
 {   // 1,2,3,5
     vector<int> nums{1,5,11,5};
     Solution sol;
-    cout<<sol.canPartition(nums)<<endl;
+    cout<<sol.canPartition2(nums)<<endl;
     system("pause");
     return 0;
 }

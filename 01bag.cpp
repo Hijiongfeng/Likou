@@ -3,7 +3,7 @@
 
 using namespace std;
 
-void func(){
+void func(){            //      二维数组 写法
     vector<int> weight{1,3,4};
     vector<int> value{15,20,30};
     int bagWeight = 4;
@@ -24,9 +24,24 @@ void func(){
 }
 
 
+void func2(){                   //  增加 一维数组 解法；
+    vector<int> weight{1,3,4};
+    vector<int> value{15,20,30};
+    int bagweight = 4;
+
+    vector<int> dp(bagweight+1,0);
+
+    for(int i = 0;i<weight.size();i++){
+        for(int j = bagweight;j>=weight[i];j--){
+            dp[j] = max(dp[j],dp[j-weight[i]]+value[i]);
+        }
+    }
+    cout<<dp[bagweight]<<endl;
+}
+
 int main(int argc, char const *argv[])
 {
-    func();
+    func2();
     system("pause");
     return 0;
 }
