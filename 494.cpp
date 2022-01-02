@@ -15,7 +15,7 @@ using namespace std;
 
 class Solution {
 public:
-    int findTargetSumWays(vector<int>& nums, int target) {
+    int findTargetSumWays(vector<int>& nums, int target) {      // 二维好理解一点
         int sum = accumulate(nums.begin(),nums.end(),0);
         if(target > sum) return 0;
         if((sum+target)%2 == 1) return 0;
