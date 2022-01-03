@@ -17,7 +17,7 @@ public:
             while(sum>=target){
                 int subLength = j - i + 1;
                 result = result < subLength ? result : subLength;
-                sum -= nums[i];
+                sum -= nums[i];             //  就是应该先减去，然后索引往前 走一下。
                 i++;
             }
         }
