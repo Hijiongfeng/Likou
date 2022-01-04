@@ -27,7 +27,7 @@ public:
 
 class Solution2 {
 public:
-    int change(int amount, vector<int>& coins) {        // 二维数组  不好做
+    int change(int amount, vector<int>& coins) {        // 二维数组  不好做呀
         vector<vector<int>> dp(coins.size(),vector<int> (amount+1,0));
         dp[0][0] = 1;
         for(int j=0;j<=amount;j++){
