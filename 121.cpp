@@ -13,7 +13,7 @@ using namespace std;
 
 class Solution {
 public:
-    int maxProfit(vector<int>& prices) {
+    int maxProfit(vector<int>& prices) {        // 贪心算法，找到左最小值，右最大值
         int low = INT_MAX;
         int result = 0;
         for(int i = 0;i<prices.size();i++){
@@ -24,10 +24,30 @@ public:
     }
 };
 
+class Solution2 {
+public:
+    int maxProfit(vector<int>& prices) {        // 动态规划 dp
+
+        int len = prices.size();
+        vector<vector<int>> dp(len,vector<int> (2,0));
+
+        dp[0][0] = -prices[0];
+        dp[0][1] = 0;
+
+        for(int i = 1;i<len;i++){
+            dp[i][0] = max(dp[i-1][0],-prices[i]);          //  持有股票
+            dp[i][1] = max(dp[i-1][1],dp[i-1][0]+prices[i]);    //  不持有股票
+            cout<<dp[i][0]<<" "<<dp[i][1]<<endl;
+        }
+
+        return dp[len-1][1];
+    }
+};
+
 int main(int argc, char const *argv[])
 {
     vector<int> prices{7,1,5,3,6,4};
-    Solution sol;
+    Solution2 sol;
     cout<<sol.maxProfit(prices)<<endl;
     system("pause");
     return 0;
