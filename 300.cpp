@@ -18,8 +18,8 @@ public:
 
         int result = 0;
         for(int i = 1;i<nums.size();i++){
-            for(int j = 0;j < i;j++){
-                if(nums[i] > nums[j]) dp[i] = max(dp[i],dp[j]+1);
+            for(int j = 0;j < i;j++){  //位置i的最长升序子序列等于j从0到i-1各个位置的最长升序子序列 + 1 的最大值。
+                if(nums[i] > nums[j]) dp[i] = max(dp[i],dp[j]+1);   //  比较的是 i 和 j 不强调连续
             }
             if(dp[i]>result) result  = dp[i];
         }
