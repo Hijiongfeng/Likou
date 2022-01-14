@@ -49,12 +49,27 @@ public:
     }
 };
 
+class Solution3 {       // 动态规划 dp
+public:
+    int maxSubArray(vector<int>& nums) {
+        if(nums.size() == 0) return 0;
+        vector<int> dp(nums.size(),0);
+        dp[0] = nums[0];
+        int result = dp[0];
+        for(int i = 1;i<nums.size();i++){
+            dp[i] = max(dp[i-1]+nums[i],nums[i]);       // 状态转移公式
+            if(dp[i] > result) result = dp[i];          // 保存最大值
+        }
+        return result;
+    }
+};
+
 
 
 int main(int argc, char const *argv[])
 {
-    vector<int> nums{5,4,-1,7,8};
-    Solution2 sol;
+    vector<int> nums{1};
+    Solution3 sol;
     cout<<sol.maxSubArray(nums)<<endl;
     system("pause");
     return 0;
