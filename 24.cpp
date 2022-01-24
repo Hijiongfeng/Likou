@@ -33,6 +33,12 @@ public:
             cur->next->next = temp;         // 步骤2
             cur->next->next->next = temp1;  //步骤3
 
+/*
+            cur = temp2;
+            temp2 = temp1;              // temp 是临时变量 不能这样写
+            temp1 = cur->next->next;
+*/
+
             cur  = cur->next->next;
         }
         return dummyNode->next;

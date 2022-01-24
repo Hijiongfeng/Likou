@@ -1,5 +1,6 @@
 #include<iostream>
 #include<string>
+#include<vector>
 using namespace std;
 /*
 给定两个字符串 s 和 t ，编写一个函数来判断 t 是否是 s 的字母异位词。
@@ -23,14 +24,30 @@ public:
         }
         return true;
     }
+
+    bool isAnagram2(string s, string t) {  //哈希表
+        vector<int> recore(26,0);
+        for(int i = 0;i<s.size();i++){
+            recore[s[i]-'a']++;
+        }
+        for(int j = 0;j<t.size();j++){
+            recore[t[j]-'a']--;
+        }
+        for(int i = 0;i<26;i++){
+            if(recore[i] != 0){
+                return false;
+            }
+        }
+        return true;
+    }
 };
 
 int main(int argc, const char** argv) {
     string s1 = "rac";
-    string s2 = "car";
+    string s2 = "carp";
     cout<<s2[2]-'a'<<endl;
     Solution sol;
-    cout<<sol.isAnagram(s1,s2)<<endl;;
+    cout<<sol.isAnagram2(s1,s2)<<endl;;
     system("pause");
     return 0;
 }
