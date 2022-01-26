@@ -20,12 +20,12 @@ public:
         //if(nums.size()==0) return resualt;
         sort(nums.begin(),nums.end());
         for(int i=0;i<nums.size();i++){
-            if (i > 0 && nums[i] == nums[i - 1]) {
+            if (i > 0 && nums[i] == nums[i - 1]) {      // 去重 a
                 continue;
             }
             for(int j=i+1;j<nums.size();j++){
                 //if(nums[i]+nums[j]>target) return resualt;
-                if(j > i+1 && nums[j] == nums[j-1]){
+                if(j > i+1 && nums[j] == nums[j-1]){    // 去重 b
                     continue;
                 }
                 int leftIndex = j+1;
@@ -38,8 +38,8 @@ public:
                     }else{
                         resualt.push_back(vector<int>{nums[i],nums[j],nums[leftIndex],nums[rightIndex]});
                         // 去重逻辑应该放在找到一个三元组之后
-                        while (rightIndex > leftIndex && nums[rightIndex] == nums[rightIndex - 1]) rightIndex--;
-                        while (rightIndex > leftIndex && nums[leftIndex] == nums[leftIndex + 1]) leftIndex++;
+                        while (rightIndex > leftIndex && nums[rightIndex] == nums[rightIndex - 1]) rightIndex--;  // 去重 c 
+                        while (rightIndex > leftIndex && nums[leftIndex] == nums[leftIndex + 1]) leftIndex++;       // 去重 d
                         leftIndex++;
                         rightIndex--;
                     }

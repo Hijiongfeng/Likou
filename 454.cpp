@@ -25,7 +25,7 @@ public:
         for(int c:nums3){
             for(int d:nums4){
                 if(umap.find(0-(c+d))!=umap.end()){
-                    count += umap[0-(c+d)];
+                    count += umap[0-(c+d)];         // 就相当于一个 组合数
                     //count++;
                 }
             }
