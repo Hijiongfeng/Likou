@@ -3,7 +3,7 @@
 #include<map>
 #include<unordered_map>
 #include<string>
-
+#include<string.h>
 using namespace std;
 
 
@@ -140,6 +140,18 @@ void insert_study(){
 
 
 }
+
+void multimap_study(){
+    // multimap 可以存储 键相同的 键值对
+    // multimap 构造函数可以 仿照 map 基本是相同的
+    multimap<string,string> myMultiMap;
+    //count(key)	在当前 multimap 容器中，查找键为 key 的键值对的个数并返回。
+
+    // 与map相比，multimap并没有提供 at 函数，也没有重载 [] 运算符
+    // 因为multimap容器中指定的键可能对应多个键值对，而不是一个
+    
+}
+
 
 int main(int argc, char const *argv[])
 {
