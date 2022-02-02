@@ -33,10 +33,44 @@ public:
     }
 };
 
+class Solution2 {
+private:
+    stack<int> st;
+public:
+    int evalRPN(vector<string>& tokens) {
+        for(int i = 0;i<tokens.size();i++){
+            if(tokens[i] != "+" && tokens[i] != "-" && tokens[i] != "*" && tokens[i] != "/"){
+                st.push(stoi(tokens[i]));
+            }
+            if(tokens[i] == "+"){
+                int a1 = st.top(); st.pop();
+                int a2 = st.top(); st.pop();
+                int res = a2 + a1; st.push(res);
+            }
+            if(tokens[i] == "-"){
+                int a1 = st.top(); st.pop();
+                int a2 = st.top(); st.pop();
+                int res = a2 - a1; st.push(res);
+            }
+            if(tokens[i] == "*"){
+                int a1 = st.top(); st.pop();
+                int a2 = st.top(); st.pop();
+                int res = a2 * a1; st.push(res);
+            }
+            if(tokens[i] == "/"){
+                int a1 = st.top(); st.pop();
+                int a2 = st.top(); st.pop();
+                int res = a2 / a1; st.push(res);
+            }
+        }
+       return st.top();
+    }
+};
+
 int main(int argc, const char** argv) {
     //"4","13","5","/","+"
     vector<string> tok = {"10","6","9","3","+","-11","*","/","*","17","+","5","+"};
-    Solution sol;
+    Solution2 sol;
     cout<<sol.evalRPN(tok)<<endl;;
     system("pause");
     return 0;
