@@ -70,6 +70,44 @@ public:
     }
 };
 
+// 上面的实现写法是 遍历整个树，从所有的路径中，找出和等于 targetsum 的
+class Solution2 {       // 递归函数无返回值，遍历整个树，无返回值；
+private:
+    vector<int> path;
+    vector<vector<int>> final;
+    void travsal(TreeNode* cur,int count){
+        if(cur->left == nullptr  && cur->right == nullptr && count == 0){
+            final.push_back(path);
+            return;
+        }
+        if(cur->left == nullptr && cur->left == nullptr) return;
+
+        if(cur->left){
+            path.push_back(cur->left->val);
+            count -= cur->left->val;
+            travsal(cur->left,count);
+            count += cur->left->val;
+            path.pop_back();
+        }
+
+        if(cur->right){
+            path.push_back(cur->right->val);
+            count -= cur->right->val;
+            travsal(cur->right,count);
+            count += cur->right->val;
+            path.pop_back();
+        }
+    }
+
+public:
+    vector<vector<int>> pathSum(TreeNode* root, int targetSum) {
+        if(root == nullptr) return final;
+        path.push_back(root->val);
+        travsal(root,targetSum);
+        return final;
+    }
+};
+
 int main(int argc, const char** argv) {
     vector<int> num = {5,4,8,11,-1,13,4,7,2,-1,-1,-1,-1,5,1};
     TreeNode *root = construct_binary_tree(num);

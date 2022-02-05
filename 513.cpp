@@ -51,7 +51,7 @@ public:
             for(int i = 0;i<size;i++){
                 TreeNode *node = que.front();
                 que.pop();
-                if(i == 0) vec.push_back(node->val);
+                if(i == 0) vec.push_back(node->val);        // 这感觉不对了啊，第一个元素不一定左边的啊；但是好像测试案例都是这样的
                 if(node->left) que.push(node->left);
                 if(node->right) que.push(node->right);
             }
@@ -61,7 +61,7 @@ public:
 };
 
 int main(int argc, const char** argv) {
-    vector<int> num = {1,2,3,4,-1,5,6,-1,-1,-1,-1,7,-1,-1,-1};
+    vector<int> num = {2,-1,3};
     TreeNode *root = construct_binary_tree(num);
     Solution sol;
     cout<<sol.findBottomLeftValue(root)<<endl;

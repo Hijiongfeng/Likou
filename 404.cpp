@@ -1,6 +1,7 @@
 #include<iostream>
 #include<vector>
 #include<stack>
+#include<queue>
 
 using namespace std;
 
@@ -89,7 +90,7 @@ int main(int argc, const char** argv) {
     vector<int> num = {3,9,20,-1,-1,15,7};
     TreeNode *root = construct_binary_tree(num);
     Solution sol;
-    cout<<sol.sumOfLeftLeaves2(root)<<endl;
+    cout<<sol.sumOfLeftLeaves(root)<<endl;
 
     system("pause");
     return 0;
