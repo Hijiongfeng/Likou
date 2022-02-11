@@ -1,6 +1,7 @@
 #include<iostream>
 #include<vector>
 #include<map>
+#include<unordered_map>
 using namespace std;
 
 struct TreeNode
@@ -88,6 +89,23 @@ public:
         }
         return res;
     }
+    vector<int> findMode2(TreeNode* root){
+        vector<int> result;
+        map<int,int> mp;
+        if(root == nullptr) return result;
+        traversal(root);
+        for(int i = 0;i<vec.size();i++){
+            mp[vec[i]]++;
+        }
+        multimap<int,int,std::greater<int>> un_map;
+        for(auto it = mp.begin();it!=mp.end();it++){
+            int a = it->second;
+            int b = it->first;
+            un_map.insert({a,b});
+        }
+        result.push_back(un_map.begin()->second);
+        return result;
+    }
 };
 
 int main(int argc, char const *argv[])
@@ -95,7 +113,7 @@ int main(int argc, char const *argv[])
     vector<int> num = {1,-1,2,-1,-1,2,-1};
     TreeNode *root = construct_binary_tree(num);
     Solution sol;
-    auto fin = sol.findMode(root);
+    auto fin = sol.findMode2(root);
     for(auto x:fin){
         cout<<x<<endl;
     }

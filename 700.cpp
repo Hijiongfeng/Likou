@@ -80,13 +80,29 @@ public:
         if(root->val < val) return searchBST2(root->right,val);
         return nullptr;
     }
+
+    TreeNode* searchBST3(TreeNode* root, int val) {  // 迭代
+        if(root == nullptr) return nullptr;
+        TreeNode *node = nullptr;
+        while(root){
+            if(root->val > val){
+                root = root->left;
+            }else if(root->val < val){
+                root = root->right;
+            }else{
+                node = root;
+                break;
+            }
+        }
+        return node;
+    }
 };
 
 int main(int argc, const char** argv) {
     vector<int> num = {4,2,7,1,3,-1,-1};
     TreeNode *root = construct_binary_tree(num);
     Solution sol;
-    TreeNode *node2 = sol.searchBST2(root,5);
+    TreeNode *node2 = sol.searchBST3(root,2);
     system("pause");
     return 0;
 }

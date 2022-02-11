@@ -19,7 +19,7 @@ private:
     vector<vector<int>> res;
     vector<int> path;
     void backtracking(vector<int>& nums,int startindex){
-        if(path.size() <= nums.size()){
+        if(path.size() <= nums.size()){         // 取树上的 所有节点 不用加 return
             res.push_back(path);   
         }else{
             return;
