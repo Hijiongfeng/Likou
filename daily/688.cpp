@@ -37,7 +37,7 @@ public:
 };
 
 
-class Solution2 {    // 暴力解法  找到每条路径，一条路径上概率相乘，不同路径上概率相加
+class Solution2 {    // 暴力解法  找到每条路径，一条路径上概率相乘，不同路径上概率相加  dfs
 private:
     vector<vector<int>> dirs = {{-2, -1}, {-2, 1}, {2, -1}, {2, 1}, {-1, -2}, {-1, 2}, {1, -2}, {1, 2}};
     double dfs(int n,int k,int i,int j){
