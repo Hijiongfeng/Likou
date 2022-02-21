@@ -21,69 +21,61 @@ struct ListNode{
 };
 
 class Solution {
-private:
-    vector<int> vec;
-    void addList(ListNode* l1,ListNode* l2){
-        
-        if(l1 == nullptr ) return;
 
-        if(l1!= nullptr && l2!=nullptr){
-            int value = l1->val + l2->val;
-            if(value >= 10){
-                l1->val = value % 10;
-                if(l1->next){
-                    l1->next->val = l1->next->val + (value / 10);
-                }else{
-                    ListNode* node = new ListNode(value / 10);
-                    l1->next = node;
-                }
-                
-            }else{
-                l1->val = value;
-            }
-            
-        }
-        vec.push_back(l1->val);
-        if(l2!=nullptr){
-            addList(l1->next,l2->next);
-        }
-        else{
-            addList(l1->next,nullptr);
-        }
-        
-    }
 public:
     ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
-        int len1 = 0,len2 = 0;
-        ListNode* temp1 = l1;
-        ListNode* temp2 = l2;
-        while(temp1!=nullptr){
+        int len1=1;//记录l1的长度
+        int len2=1;//记录l2的长度
+        ListNode* p=l1;
+        ListNode* q=l2;
+        while(p->next!=NULL)//获取l1的长度
+        {
             len1++;
-            temp1 = temp1->next;
+            p=p->next;
         }
-        while(temp2!=nullptr){
+        while(q->next!=NULL)//获取l2的长度
+        {
             len2++;
-            temp2 = temp2->next;
+            q=q->next;
         }
-
-        if(len2 > len1)
-            swap(l1,l2);
-        ListNode* temp3 = l2;
-        int gap = len1 - len2;
-        while(gap--){
-            ListNode* node = new ListNode(0);
-            temp3->next = node;
-            temp3 = temp3->next;
+        if(len1>len2)//l1较长，在l2末尾补零
+        {
+            for(int i=1;i<=len1-len2;i++)
+            {
+                q->next=new ListNode(0);
+                q=q->next;
+            }
         }
+        else//l2较长，在l1末尾补零
+        {
+            for(int i=1;i<=len2-len1;i++)
+            {
+                p->next=new ListNode(0);
+                p=p->next;
+            }
+        }
+        p=l1;
+        q=l2;
         
-        addList(l1,l2);
-
-        ListNode* res = nullptr;
-        reverse(vec.begin(),vec.end());
-        for(auto & a : vec){
-            res = new ListNode(a,res);
+        bool count=false;//记录进位
+        ListNode* l3=new ListNode(-1);//存放结果的链表
+        ListNode* w=l3;//l3的移动指针
+        int i=0;//记录相加结果
+        while(p!=NULL&&q!=NULL)
+        {
+            i=count+p->val+q->val;
+            w->next=new ListNode(i%10);
+            count=i>=10?true:false;
+            w=w->next;
+            p=p->next;
+            q=q->next;
         }
-        return res;
+        if(count)//若最后还有进位
+        {
+            w->next=new ListNode(1);
+            w=w->next;
+        }
+        return l3->next; 
     }
 
 };
@@ -91,8 +83,8 @@ public:
 
 int main(int argc, char const *argv[])
 {
-    vector<int> num1 = {9,9,9};
-    vector<int> num2 = {9};
+    vector<int> num1 = {9,9,9,9};
+    vector<int> num2 = {9,9};
     ListNode* l1 = nullptr;
     ListNode* l2 = nullptr;
     for(auto & a : num1){
