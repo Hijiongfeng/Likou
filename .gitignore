@@ -1,4 +1,5 @@
 # 忽略项目
 /.vscode/
+/book/*.exe
 /daily/*.exe
 *.exe
