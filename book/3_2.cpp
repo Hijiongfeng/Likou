@@ -139,7 +139,51 @@ public:
         return *this;
     }
 
-    
+    iterator begin(){
+        return head->next;          // 会调用构造函数
+    }
+
+    const_iterator begin() const{
+        return head->next;
+    }
+
+    iterator end(){
+        return tail;
+    }
+
+    const_iterator end() const{
+        return tail;
+    }
+
+    int size() const{
+        return theSize;
+    }
+
+    bool empty() const{
+        return size == 0;
+    }
+
+    void clear(){
+        while(!empty())
+            pop_front();
+    }
+
+    Object & front(){
+        return *begin();        // 重载了 * 号 运算符
+    }
+
+    const Object & front() const{
+        return *begin();
+    }
+
+    Object & back(){
+        return *--end();
+    }
+
+    const Object & end() const{
+        return *--end();
+    }
+
 
 private:
     int theSize;
