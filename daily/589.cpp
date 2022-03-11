@@ -1,5 +1,6 @@
 #include<iostream>
 #include<vector>
+#include<stack>
 
 using namespace std;
 /*
@@ -50,7 +51,19 @@ class Solution2 {        //  迭代法      //  结果正确
 
 public:
     vector<int> preorder(Node* root) {
-
+        vector<int> vec;
+        if(root == nullptr) return vec;
+        stack<Node*> st;
+        st.push(root);
+        while(!st.empty()){
+            Node *node = st.top();
+            st.pop();
+            vec.push_back(node->val);       
+            for(int i = node->children.size()-1;i>=0;i--){          // 要先 加入 最右边的 节点
+                st.push(node->children[i]);
+            }
+        }
+        return vec;
     }
 };
 
