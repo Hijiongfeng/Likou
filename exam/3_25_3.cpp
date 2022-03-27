@@ -4,6 +4,11 @@
 
 using namespace std;
 
+/*
+
+验证合法字符串
+*/
+
 void isValid(string s){
     if(s.size() == 0)
         cout<< "Yes" <<endl;
