@@ -87,7 +87,6 @@ int main(int argc, char const *argv[])
     int n = 13,k = 5;
     Solution2 sol;
     cout<<sol.findKthNumber(n,k)<<endl;
-    for (int i = 0; i < 2; i++)
 
     system("pause");
     return 0;
