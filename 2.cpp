@@ -80,10 +80,41 @@ public:
 
 };
 
+class Solution2 {
+public:
+    ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
+        ListNode *node1 = l1;
+        ListNode *node2 = l2;
+        ListNode *dummyNode = new ListNode(0);
+        ListNode * temp = dummyNode;
+        int flag = 0;
+        while(node1 || node2 || flag){
+            int val1 = node1 == nullptr ? 0:node1->val;
+            int val2 = node2 == nullptr ? 0:node2->val;
+
+            int sum = val1 + val2 + flag;
+            if(sum >= 10){
+                sum %= 10;
+                ListNode *node = new ListNode(sum);
+                temp->next = node;
+                flag = 1;
+            }else{
+                ListNode *node = new ListNode(sum);
+                temp->next = node;
+                flag = 0;
+            }
+            temp = temp->next;
+            if(node1) node1 = node1->next;
+            if(node2) node2 = node2->next;
+        }
+        return dummyNode->next;
+    }
+};
+
 
 int main(int argc, char const *argv[])
 {
-    vector<int> num1 = {9,9,9,9};
+    vector<int> num1 = {9,9,9};
     vector<int> num2 = {9,9};
     ListNode* l1 = nullptr;
     ListNode* l2 = nullptr;
@@ -93,7 +124,7 @@ int main(int argc, char const *argv[])
     for(auto & b : num2){
         l2 = new ListNode(b,l2);
     }
-    Solution sol;
+    Solution2 sol;
     ListNode* res = sol.addTwoNumbers(l1,l2);
     system("pause");
     return 0;
