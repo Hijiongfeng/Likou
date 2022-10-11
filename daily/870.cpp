@@ -64,6 +64,28 @@ public:
         }
         return ans;
     }
+
+
+    vector<int> advantageCount3(vector<int>& nums1, vector<int>& nums2) {
+        sort(nums1.begin(),nums1.end());
+        vector<pair<int,int>> vt;
+        for(int i = 0;i<nums2.size();i++){
+            vt.push_back(make_pair(nums2[i],i));
+        }
+        sort(vt.begin(),vt.end());
+        vector<int> ans(nums2.size());
+        int l1 = 0,r1 = nums1.size()-1,l2 = 0,r2 = nums2.size()-1;
+        for(int & num : nums1){
+            if(num <= vt[l2].first){        // nums1的最小值小于num2的最小值，匹配最大值
+                ans[vt[r2].second] = num;
+                r2--;
+            }else{
+                ans[vt[l2].second] = num;
+                l2++;
+            }
+        }
+        return ans;
+    }
 };
 
 int main(int argc, char const *argv[])

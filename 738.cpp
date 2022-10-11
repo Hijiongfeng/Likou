@@ -20,7 +20,7 @@ public:
         int flag = strNum.size();
         for(int i = strNum.size()-1;i>0;i--){
             if(strNum[i-1] > strNum[i]){
-                flag = i;
+                flag = i;                       // 也可以直接把这一位变成9，前一位减少1.
                 strNum[i-1]--;
             }
         }

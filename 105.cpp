@@ -53,8 +53,8 @@ public:
 
 int main(int argc, char const *argv[])
 {
-    vector<int> preorder = {3,9,20,15,17};
-    vector<int> inorder = {9,3,15,20,7};
+    vector<int> preorder = {5,2,1,4,3,6,8,7,9,11,10};
+    vector<int> inorder = {1,2,3,4,5,6,7,8,9,10,11};
     Solution sol;
     TreeNode *root = sol.buildTree(preorder,inorder);
     int a= 0;
