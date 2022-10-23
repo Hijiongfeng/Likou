@@ -42,7 +42,7 @@ TreeNode* construct_binary_tree(const vector<int>& vec){
 
 class Solution {
 public:
-    TreeNode* insertIntoBST(TreeNode* root, int val) {  // 迭代算法
+    TreeNode* insertIntoBST(TreeNode* root, int val) {
         if(root == nullptr) return new TreeNode(val);
         TreeNode *cur = root;
         TreeNode *parent = root;
@@ -56,10 +56,6 @@ public:
         else parent->right = node;
 
         return root;
-    }
-
-    TreeNode* insertIntoBST(TreeNode* root, int val) {  // 递归版本 算法
-        
     }
 };
 
