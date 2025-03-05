@@ -53,13 +53,32 @@ public:
         }
         return ans;
     }
+    // 2025.3.4
+    int maxArea3(vector<int> &height)
+    {
+        int ans = 0;
+        int left = 0;
+        int right = height.size()-1;
+        while (left <= right)
+        {
+            int area = (right-left)*min(height[left], height[right]);
+            ans = max(ans, area);
+            if(height[left] < height[right]){
+                left++;
+            }else{
+                right--;
+            }
+        }
+        return ans;
+    }
 };
 
 int main(int argc, char const *argv[])
 {
-    vector<int> height = {1, 8, 6, 2, 5, 4, 8, 3, 7};
+    // vector<int> height = {1, 8, 6, 2, 5, 4, 8, 3, 7};
+    vector<int> height = {1, 1};
     Solution sol;
-    cout << sol.maxArea2(height) << endl;
+    cout << sol.maxArea3(height) << endl;
     system("pause");
     return 0;
 }

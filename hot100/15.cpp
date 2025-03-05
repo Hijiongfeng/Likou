@@ -42,6 +42,45 @@ public:
         }
         return resualt;
     }
+    vector<vector<int>> threeSum2(vector<int>& nums)
+    {
+        sort(nums.begin(), nums.end());
+        vector<vector<int>> ans;
+        for(int i = 0; i< nums.size();i++)
+        {
+            if(nums[i]>0) continue;
+            // 去重
+            if (i > 0 && nums[i] == nums[i - 1]) {
+                continue;
+            }
+            int left = i+1, right = nums.size()-1;
+            while (left < right)
+            {
+                if(nums[left] + nums[right] > -nums[i]){
+                    right--;
+                }else if (nums[left] + nums[right] < -nums[i])
+                {
+                    left++;
+                }else{
+                    ans.push_back({nums[i], nums[left], nums[right]});
+                    // 去重
+                    while (left <right && nums[left] == nums[left+1])
+                    {
+                        left++;
+                    }
+
+                    while (left <right && nums[right] == nums[right-1])
+                    {
+                        right--;
+                    }   
+                    left++;
+                    right--;
+                }
+            }  
+        }
+
+        return ans;
+    }
 };
 
 // 哈希解法
@@ -81,15 +120,14 @@ public:
 int main(int argc, char const *argv[])
 {   //例子 0,0,0,0
     // -4，-1，-1,0,1,2
-    vector<int> nums = {0,0,0,0}; 
+    vector<int> nums = {-4,-1,-1,0,1,2}; 
     Solution sol;
-    auto final = sol.threeSum(nums);
+    auto final = sol.threeSum2(nums);
     for(auto &x:final){
         for(auto &y:x){
             cout<<y<<" ";
         }
         cout<<endl;
     }
-    system("pause");
     return 0;
 }
