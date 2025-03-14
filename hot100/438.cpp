@@ -76,6 +76,30 @@ public:
         }
         return ans;
     }
+
+    // 滑动窗口
+    vector<int> findAnagrams2(string s, string p){
+        if(p.size() > s.size()) return {};
+
+        vector<int> res;
+        vector<int> p_ins(26,0);
+        vector<int> s_ins(26,0);
+
+        for(int i = 0;i<p.size();i++){
+            s_ins[s[i] - 'a']++;
+            p_ins[p[i] - 'a']++;
+        }
+        if(s_ins == p_ins)
+            res.push_back(0);
+        
+        for(int i = p.size();i<s.size();i++){
+            s_ins[s[i-p.size()] - 'a']--;
+            s_ins[s[i] - 'a']++;
+            if(s_ins == p_ins)
+                res.push_back(i-p.size()+1);
+        } 
+        return res;
+    }
 };
 
 
@@ -83,7 +107,6 @@ int main(int argc, char const *argv[])
 {
     string s = "cbaebabacd",p = "abc";
     Solution2 sol;
-    vector<int> vec = sol.findAnagrams(s,p);
-    system("pause");
+    vector<int> vec = sol.findAnagrams2(s,p);
     return 0;
 }

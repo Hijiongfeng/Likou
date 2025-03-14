@@ -42,13 +42,38 @@ public:
         }
         return ans;
     }
+
+    vector<int> productExceptSelf2(vector<int>& nums){
+        int prefix = 1,suffix = 1;
+        vector<int> pre(nums.size());
+        vector<int> suf(nums.size());
+        for(int i = 0;i<nums.size();i++){
+            prefix *= nums[i];
+            pre[i] = prefix;
+        }
+        for(int i = nums.size() -1;i>=0;i--){
+            suffix *= nums[i];
+            suf[i] = suffix;
+        }
+        vector<int> ans(nums.size());
+        for(int i = 0;i<nums.size();i++){
+            if(i == 0){
+                ans[i] = suf[i+1];
+            }else if(i == nums.size() -1){
+                ans[i] = pre[i-1];
+            }else{
+                ans[i] = pre[i-1] * suf[i+1];
+            }
+        }
+        return ans;
+    }
 };
 
 int main(int argc, char const *argv[])
 {
     vector<int> nums = {-1,1,0,-3,3};
     Solution sol;
-    vector<int> vec = sol.productExceptSelf(nums);
+    vector<int> vec = sol.productExceptSelf2(nums);
     for(int a : vec){
         cout<<a<<endl;
     }

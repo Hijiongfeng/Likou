@@ -1,6 +1,4 @@
-#include<iostream>
-#include<vector>
-#include<numeric>
+#include<bits/stdc++.h>
 using namespace std;
 
 /*
@@ -62,15 +60,35 @@ public:
         }
         return result;
     }
+    // 动态规划
+    /*
+    1. 初始化
+    2. 状态转移方程
+        dp[i] = max(dp[i-1] + nums[i], num[i])
+    
+    */
+    int maxSubArray2(vector<int>& nums){
+
+        int res = INT_MIN;
+        vector<int> dp(nums.size(), 0);
+        dp[0] = nums[0];
+        res = max(res, dp[0]);
+        for (size_t i = 1; i < nums.size(); i++)
+        {
+            dp[i] = max(dp[i-1] + nums[i], nums[i]);
+            res = max(res, dp[i]);
+        }
+        return res;
+    }
 };
 
 
 
 int main(int argc, char const *argv[])
 {
-    vector<int> nums{1};
+    vector<int> nums{5,4,-1,7,8};
     Solution3 sol;
-    cout<<sol.maxSubArray(nums)<<endl;
-    system("pause");
+    cout<<sol.maxSubArray2(nums)<<endl;
+    // system("pause");
     return 0;
 }

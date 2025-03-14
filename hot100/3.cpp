@@ -34,13 +34,38 @@ public:
         }
         return max<int>(ans,ust.size());    // 防止出现那些 没有重复的，就进不去那个while 导致ans的值不对，返回ust.size()
     }
+
+    int lengthOfLongestSubstring2(string s){
+
+        unordered_set<char> ch;
+        int left = 0;
+        int right = 0;
+        int size = s.size();
+        int res = 0;
+        while (right < size)
+        {
+            if(ch.find(s[right]) != ch.end()){
+                while (ch.find(s[right]) != ch.end())
+                {
+                    ch.erase(s[left]);
+                    left++;
+                }
+                
+            }
+            ch.insert(s[right]);
+            res = max(res, right - left + 1);
+            right++;
+            
+        }
+        return res;
+    }
 };
 
 int main(int argc, char const *argv[])
 {
-    string s = "abcabcbb";
+    // string s = "abcabcbb";
+    string s = "pwwkew";
     Solution sol;
-    cout<<sol.lengthOfLongestSubstring(s)<<endl;
-    system("pause");
+    cout<<sol.lengthOfLongestSubstring2(s)<<endl;
     return 0;
 }

@@ -38,18 +38,37 @@ public:
         }
         return false;
     }
+
+    bool searchMatrix3(vector<vector<int>>& matrix, int target){
+        int m = matrix.size();
+        int n = matrix[0].size();
+
+        int row = 0, col = n -1;
+        while (row < m && col >= 0)
+        {
+            if(target > matrix[row][col]){
+                row++;
+            }else if(target < matrix[row][col]){
+                col--;
+            }else{
+                return true;
+            } 
+        }
+        return false;
+    }
 };
 
 int main(int argc, char const *argv[])
 {
-    vector<vector<int>> matrix = {{1,4,7,11,15},
-                                  {2,5,8,12,19},
-                                  {3,6,9,16,22},
-                                  {10,13,14,17,24},
-                                  {18,21,23,26,30}};
-    int target = 33;
+    // vector<vector<int>> matrix = {{1,4,7,11,15},
+    //                               {2,5,8,12,19},
+    //                               {3,6,9,16,22},
+    //                               {10,13,14,17,24},
+    //                               {18,21,23,26,30}};
+    vector<vector<int>> matrix = {{1,1}};
+    int target = 2;
     Solution sol;
-    cout<<sol.searchMatrix(matrix,target)<<endl;
+    cout<<sol.searchMatrix3(matrix,target)<<endl;
     system("pause");
     return 0;
 }

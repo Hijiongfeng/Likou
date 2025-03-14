@@ -39,13 +39,39 @@ public:
         }
         return vec;
     }
+
+    vector<vector<int>> merge2(vector<vector<int>>& intervals){
+        sort(intervals.begin(), intervals.end(),cmp);           // 自定义排序
+        if(intervals.size() == 1)
+            return intervals;
+        int lsat_flag = false;
+        vector<vector<int>> res;
+        for(int i = 1; i < intervals.size();i++){
+            vector<int> temp_res = intervals[i-1];
+            while (i<intervals.size() && intervals[i][0]>=temp_res[0] && intervals[i][0]<=temp_res[1])
+            {
+                temp_res[0] = temp_res[0];
+                temp_res[1] = max(intervals[i][1], temp_res[1]) ;
+                if(i == intervals.size()-1) lsat_flag = true;           // 判断最后一个有没有
+                i++;
+            }
+
+            res.push_back(temp_res);
+        }
+
+        if(lsat_flag == false){
+            res.push_back(intervals.back());
+        }
+        return res;
+
+    }
 };
 
 int main(int argc, char const *argv[])
 {//{1,3},{2,6},{8,10},{15,18}
-    vector<vector<int>> intervals{{1,3},{2,6},{8,10},{9,18}};
+    vector<vector<int>> intervals{{1,4},{2,3}};
     Solution sol;
-    vector<vector<int>> final = sol.merge(intervals);
+    vector<vector<int>> final = sol.merge2(intervals);
     for(auto x:final){
         for(auto y:x){
         cout<<y<<" ";}
